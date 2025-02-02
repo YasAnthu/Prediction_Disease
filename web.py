@@ -6,9 +6,23 @@ from streamlit_option_menu import option_menu
 st.set_page_config(page_title='Prediction of Disease Outbreaks',
                    layout='wide',
                    page_icon="doctor")
-diabetes_model=pickle.load(open(r"C:\Users\yasanthu\Desktop\Prediction\diabetes_model_trained.sav",'rb'))
-heart_model=pickle.load(open(r"C:\Users\yasanthu\Desktop\Prediction\heart_model_trained.sav",'rb'))
-parkinson_model=pickle.load(open(r"C:\Users\yasanthu\Desktop\Prediction\parkinson_model_trained.sav",'rb'))
+base_dir=os.path.dirname(os.path.abspath(__file__))
+
+# Correctly load the models
+def load_model(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+
+# Define model paths correctly
+diabetes_model_path = os.path.join(base_dir, "diabetes_model_trained.sav")
+heart_model_path = os.path.join(base_dir, "heart_model_trained.sav")
+parkinson_model_path = os.path.join(base_dir, "parkinson_model_trained.sav")
+
+# Load models
+diabetes_model = load_model(diabetes_model_path)
+heart_model = load_model(heart_model_path)
+parkinson_model = load_model(parkinson_model_path)
+
 
 
 with st.sidebar:
